@@ -42,7 +42,28 @@ public class BoardController extends HttpServlet {
 			}
 
 		}
+		
+		else if (command.equals("/detail.do")) {
+			action = new ArticleDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 
+		}
+
+		else if (command.equals("/list.do")) {
+			action = new ArticleListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+
+		}
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());

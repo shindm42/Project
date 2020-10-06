@@ -1,6 +1,9 @@
 package dao;
 
+import static common.JdbcUtil.close;
+
 import java.sql.*;
+import java.util.*;
 
 import vo.*;
 
@@ -42,5 +45,39 @@ public class BoardDao {
 			}
 	    	return count_01;
 	    	
+	    }
+	    
+	    public ArrayList<ArticleVo> getArticleList() {
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        ArrayList<ArticleVo> list = new ArrayList<>();
+	        try {
+	            pstmt = con.prepareStatement
+	                    ("select b.num" +
+	                            ", m.id" +
+	                            ", b.subject" +
+	                            ", b.content" +
+	                            ", b.hit" +
+	                            ", b.wdate" +                       
+	                            " from board b" +
+	                            " inner join member m on b.mb_sq = m.sq");
+	            rs = pstmt.executeQuery();
+	            while(rs.next()) {
+	                ArticleVo vo = new ArticleVo();
+	                vo.setNum(rs.getInt("num"));
+	                vo.setSubject(rs.getString("subject"));
+	                vo.setContent(rs.getString("content"));
+	                vo.setHit(rs.getInt("hit"));
+	                vo.setWdate(rs.getString("wdate"));
+	                vo.setId(rs.getString("id"));
+	                list.add(vo);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return list;
 	    }
 }

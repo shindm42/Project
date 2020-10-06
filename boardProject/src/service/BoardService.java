@@ -6,6 +6,7 @@ import static common.JdbcUtil.getConnection;
 import static common.JdbcUtil.rollback;
 
 import java.sql.*;
+import java.util.*;
 
 import dao.*;
 import vo.*;
@@ -28,4 +29,13 @@ public class BoardService {
 		close(con);
 		return isSucess;
 	}
+	
+	public ArrayList<ArticleVo> getArticleList() {
+        BoardDao dao = BoardDao.getInstance();
+        Connection con = getConnection();
+        dao.setConnection(con);
+        ArrayList<ArticleVo> list = dao.getArticleList();
+        close(con);
+        return list;
+    }
 }
