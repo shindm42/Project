@@ -59,8 +59,8 @@ public class BoardDao {
 	                            ", b.content" +
 	                            ", b.hit" +
 	                            ", b.wdate" +                       
-	                            " from board b" +
-	                            " inner join member m on b.mb_sq = m.sq");
+	                            " from board AS b" +
+	                            " inner join member AS m on b.mb_sq = m.sq");
 	            rs = pstmt.executeQuery();
 	            while(rs.next()) {
 	                ArticleVo vo = new ArticleVo();

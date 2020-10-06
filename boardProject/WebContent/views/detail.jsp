@@ -11,8 +11,8 @@
 <title>상세보기</title>
 </head>
 <body>
-<div>제목 : <%=vo.getSubject() %></div>
-<div>내용 : <%=vo.getContent() %></div>
+<div>제목 : <%=vo.getSj() %></div>
+<div>내용 : <%=vo.getCn() %></div>
 
 <button onclick="location.href='/list.do'">뒤로가기</button>
 <%if (id.equals(vo.getId())) {%>
