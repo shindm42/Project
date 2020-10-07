@@ -1,17 +1,17 @@
 package vo;
 
 public class ArticleVo {
-	private int num;
+	private int articl_sq;
 	private	int mber_sq;
 	private int hit;
 	private String dttm;
 	private String sj;
 	private String cn;
-	public int getNum() {
-		return num;
+	public int getArticl_sq() {
+		return articl_sq;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setArticl_sq(int articl_sq) {
+		this.articl_sq = articl_sq;
 	}
 	public int getMber_sq() {
 		return mber_sq;

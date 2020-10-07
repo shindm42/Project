@@ -53,23 +53,16 @@ public class BoardDao {
 	        ArrayList<ArticleVo> list = new ArrayList<>();
 	        try {
 	            pstmt = con.prepareStatement
-	                    ("select b.num" +
-	                            ", m.id" +
-	                            ", b.subject" +
-	                            ", b.content" +
-	                            ", b.hit" +
-	                            ", b.wdate" +                       
-	                            " from board AS b" +
-	                            " inner join member AS m on b.mb_sq = m.sq");
+	                    ("select * from articl_db");
 	            rs = pstmt.executeQuery();
 	            while(rs.next()) {
-	                ArticleVo vo = new ArticleVo();
-	                vo.setNum(rs.getInt("num"));
-	                vo.setSubject(rs.getString("subject"));
-	                vo.setContent(rs.getString("content"));
+	                ArticleVo vo = new ArticleVo();	    
+	                vo.setArticl_sq(rs.getInt("articl_sq"));
+	                vo.setMber_sq(rs.getInt("mber_sq"));
+	                vo.setSj(rs.getString("sj"));
+	                vo.setCn(rs.getString("cn"));
 	                vo.setHit(rs.getInt("hit"));
-	                vo.setWdate(rs.getString("wdate"));
-	                vo.setId(rs.getString("id"));
+	                vo.setDttm(rs.getString("dttm"));	               
 	                list.add(vo);
 	            }
 	        } catch (Exception e) {
@@ -79,5 +72,45 @@ public class BoardDao {
 	            close(pstmt);
 	        }
 	        return list;
+	    }
+	    public ArticleVo getArticle(int num) {
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        ArticleVo vo = null;
+	        try {
+	            pstmt = con.prepareStatement
+	                    ("select * from articl_db where articl_sq=?");
+	            pstmt.setInt(1, num);
+	            rs = pstmt.executeQuery();
+	            while(rs.next()) {
+	                vo = new ArticleVo();
+	                vo.setArticl_sq(rs.getInt("articl_sq"));
+	                vo.setMber_sq(rs.getInt("mber_sq"));
+	                vo.setSj(rs.getString("sj"));
+	                vo.setCn(rs.getString("cn"));
+	                vo.setHit(rs.getInt("hit"));
+	                vo.setDttm(rs.getString("dttm"));
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return vo;
+	    }
+	    public int updateHitCount(int num) {
+	        PreparedStatement pstmt = null;
+	        int count = 0;
+	        try {
+	            pstmt = con.prepareStatement("update articl_db set hit=hit+1 where articl_sq=?");
+	            pstmt.setInt(1, num);
+	            count = pstmt.executeUpdate();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }finally {
+	            close(pstmt);
+	        }
+	        return count;
 	    }
 }

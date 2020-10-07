@@ -30,6 +30,24 @@ public class BoardService {
 		return isSucess;
 	}
 	
+	public boolean loginMember(MemberVo memberVo) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count_01 = dao.insertMember(memberVo);
+		
+		if (count_01 > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		return isSucess;
+	}
+	
 	public ArrayList<ArticleVo> getArticleList() {
         BoardDao dao = BoardDao.getInstance();
         Connection con = getConnection();
@@ -38,4 +56,21 @@ public class BoardService {
         close(con);
         return list;
     }
+	
+	public ArticleVo getArticle(int num) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		ArticleVo vo = null;
+		int count = dao.updateHitCount(num);
+		if (count > 0) {
+			commit(con);
+			vo = dao.getArticle(num);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return vo;
+		
+	}
 }

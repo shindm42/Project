@@ -8,6 +8,7 @@
 </head>
 <body>
 <a href="join.do">회원가입</a>
-<a href="/list.do">게시판이동</a>
+<a href="list.do">게시판이동</a>
+<a href="login.do">로그인</a>
 </body>
 </html>

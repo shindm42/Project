@@ -12,7 +12,7 @@ public class ArticleDetailAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 	throws Exception{
-		
+		String num = request.getParameter("num");
 		int buff = Integer.parseInt(num);
 		BoardService service = new BoardService();
 		ArticleVo vo = service.getArticle(buff);
