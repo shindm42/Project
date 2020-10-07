@@ -48,6 +48,15 @@ public class BoardService {
 		return isSucess;
 	}
 	
+	public MemberVo getMember(String id) {
+        BoardDao dao = BoardDao.getInstance();
+        Connection con = getConnection();
+        dao.setConnection(con);
+        MemberVo vo = dao.getMember(id);
+        close(con);
+        return vo;
+    }
+	
 	public ArrayList<ArticleVo> getArticleList() {
         BoardDao dao = BoardDao.getInstance();
         Connection con = getConnection();

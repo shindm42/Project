@@ -32,7 +32,7 @@ public class BoardController extends HttpServlet {
 
 		}
 		
-		if (command.equals("/login.do")) {
+		else if (command.equals("/login.do")) {
 			action = new MemberLoginAction();
 			try {
 				forward = action.execute(request, response);
@@ -42,6 +42,18 @@ public class BoardController extends HttpServlet {
 			}
 
 		}
+		
+		else if (command.equals("/loginProc.do")) {
+			action = new MemberLoginProcAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+
+		}
+
 
 		else if (command.equals("/joinProc.do")) {
 			action = new MemberJoinFormAction();

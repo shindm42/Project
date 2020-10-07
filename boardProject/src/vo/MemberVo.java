@@ -1,11 +1,18 @@
 package vo;
 
 public class MemberVo {
+	private int mber_sq;
 	private String id;
 	private String pwd;
 	private String nickname;
 	private String email;
 	
+	public int getMber_sq() {
+		return mber_sq;
+	}
+	public void setMber_sq(int mber_sq) {
+		this.mber_sq = mber_sq;
+	}
 	public String getId() {
 		return id;
 	}
@@ -30,6 +37,6 @@ public class MemberVo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+		
 	
 }

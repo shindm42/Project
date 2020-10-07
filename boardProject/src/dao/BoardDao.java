@@ -113,4 +113,46 @@ public class BoardDao {
 	        }
 	        return count;
 	    }
+	    
+	    public MemberVo getMember(String id) {
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        MemberVo vo = null;
+	        try {
+	            pstmt = con.prepareStatement
+	                    ("select mber_sq, id, pwd from mber_db where binary(id)=?");
+	            pstmt.setString(1, id);
+	            rs = pstmt.executeQuery();
+	            while(rs.next()) {
+	                vo = new MemberVo();
+	                vo.setMber_sq(rs.getInt("mber_sq"));
+	                vo.setId(rs.getString("id"));
+	                vo.setPwd(rs.getString("pwd"));
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return vo;
+	    }
+	    
+	    public int updateLoginState(MemberVo vo) {
+	        PreparedStatement pstmt = null;
+	        int count = 0;
+	        try {
+	            pstmt = con.prepareStatement
+	                    ("update mber_db set id=? where mber_sq=?");
+	            pstmt.setString(1, vo.getId());
+	            pstmt.setString(2, vo.getPwd());
+	            count = pstmt.executeUpdate();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }finally {
+	            close(pstmt);
+	        }
+	        return count;
+	    }
+	    
 }
