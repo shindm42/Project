@@ -22,18 +22,7 @@ public class BoardController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
 		if (command.equals("/join.do")) {
-			action = new HomeAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-
-		}
-		
-		else if (command.equals("/login.do")) {
-			action = new MemberLoginAction();
+			action = new MemberJoinForm();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -54,6 +43,17 @@ public class BoardController extends HttpServlet {
 
 		}
 
+		
+		else if (command.equals("/login.do")) {
+			action = new MemberLoginAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+
+		}
 
 		else if (command.equals("/joinProc.do")) {
 			action = new MemberJoinFormAction();

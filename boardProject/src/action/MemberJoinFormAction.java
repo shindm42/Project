@@ -22,7 +22,7 @@ public class MemberJoinFormAction implements Action{
 		memberVo.setId(id);
 		memberVo.setEmail(email);
 		memberVo.setNickname(nickname);
-		memberVo.setPwd(pwd);
+		memberVo.setPwd(BCrypt.hashpw(pwd, BCrypt.gensalt(12)));
 		
 		service.joinMember(memberVo);
 		

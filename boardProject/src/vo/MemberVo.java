@@ -6,7 +6,14 @@ public class MemberVo {
 	private String pwd;
 	private String nickname;
 	private String email;
+	private boolean lgn_fl;
 	
+	public boolean isLgn_fl() {
+		return lgn_fl;
+	}
+	public void setLgn_fl(boolean lgn_fl) {
+		this.lgn_fl = lgn_fl;
+	}
 	public int getMber_sq() {
 		return mber_sq;
 	}

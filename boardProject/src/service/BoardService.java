@@ -30,23 +30,23 @@ public class BoardService {
 		return isSucess;
 	}
 	
-	public boolean loginMember(MemberVo memberVo) {
-		BoardDao dao = BoardDao.getInstance();
-		Connection con = getConnection();
-		dao.setConnection(con);
-		boolean isSucess = false;
-		int count_01 = dao.insertMember(memberVo);
-		
-		if (count_01 > 0) {
-			commit(con);
-			isSucess = true;
-		} else {
-			rollback(con);
-		}
-		
-		close(con);
-		return isSucess;
-	}
+//	public boolean loginMember(MemberVo memberVo) {
+//		BoardDao dao = BoardDao.getInstance();
+//		Connection con = getConnection();
+//		dao.setConnection(con);
+//		boolean isSucess = false;
+//		int count_01 = dao.updateLoginState(memberVo);
+//		
+//		if (count_01 > 0) {
+//			commit(con);
+//			isSucess = true;
+//		} else {
+//			rollback(con);
+//		}
+//		
+//		close(con);
+//		return isSucess;
+//	}
 	
 	public MemberVo getMember(String id) {
         BoardDao dao = BoardDao.getInstance();
