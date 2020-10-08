@@ -80,6 +80,33 @@ public class BoardService {
 		}
 		close(con);
 		return vo;
-		
 	}
+	
+//	public int getMemberSequence(String id) {
+//        BoardDao dao = BoardDao.getInstance();
+//        Connection con = getConnection();
+//        dao.setConnection(con);
+//        int sq = dao.getMemberSequence(id);
+//        close(con);
+//        return sq;
+//    }
+	
+	public boolean insertArticle(ArticleVo vo) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count_01 = dao.insertArticle(vo);
+		
+		if (count_01 > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		return isSucess;
+	}
+		
 }
