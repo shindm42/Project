@@ -110,6 +110,26 @@ public class BoardController extends HttpServlet {
 
 		}
 		
+		else if (command.equals("/update.do")) {
+			action = new ArticleUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/delete.do")) {
+			action = new ArticleDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());

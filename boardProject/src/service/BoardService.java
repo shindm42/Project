@@ -108,5 +108,21 @@ public class BoardService {
 		close(con);
 		return isSucess;
 	}
+	
+	public boolean updateArticle(ArticleVo vo) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.updateArticle(vo);
+		if (count > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
 		
 }

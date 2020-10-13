@@ -7,6 +7,14 @@ public class ArticleVo {
 	private String dttm;
 	private String sj;
 	private String cn;
+	private String id;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getArticl_sq() {
 		return articl_sq;
 	}

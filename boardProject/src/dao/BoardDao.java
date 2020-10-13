@@ -173,6 +173,23 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return count_01;
-
+	}
+	
+	public int updateArticle(ArticleVo vo) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement("update articl_db set sj=?, cn=?, udate=? where articl_sq=?");
+			pstmt.setString(1, vo.getSj());
+			pstmt.setString(2, vo.getCn());
+			pstmt.setInt(3, vo.getArticl_sq());
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
 	}
 }
