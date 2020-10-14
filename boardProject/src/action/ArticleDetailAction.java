@@ -19,7 +19,7 @@ public class ArticleDetailAction implements Action {
 		if (vo == null) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
+			out.println("<script>alert('잘못된 접근입니다.99');location.href='/';</script>");
 			out.close();
 			return null;
 		}

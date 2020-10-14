@@ -19,7 +19,7 @@ public class ArticleDeleteAction implements Action{
 		if (id == null) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인이 필요한 서비스 입니다.');location.href='/login.do';</script>");
+			out.println("<script>alert('로그인이 필요한 서비스 입니다.3');location.href='/login.do';</script>");
 			out.close();
 			return null;
 		}

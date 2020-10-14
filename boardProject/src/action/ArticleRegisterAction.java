@@ -44,7 +44,7 @@ public class ArticleRegisterAction implements Action{
 		
 		vo.setSj(sj);
 		vo.setCn(cn);
-//		vo.setMber_sq(service.getMemberSequence(id));
+		vo.setMber_sq(service.getMemberSequence(id));
 
 		if (!service.insertArticle(vo)) {
             response.setContentType("text/html;charset=UTF-8");

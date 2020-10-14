@@ -70,23 +70,5 @@ public class JdbcUtil {
 			}
 		}
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

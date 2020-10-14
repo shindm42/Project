@@ -82,14 +82,14 @@ public class BoardService {
 		return vo;
 	}
 	
-//	public int getMemberSequence(String id) {
-//        BoardDao dao = BoardDao.getInstance();
-//        Connection con = getConnection();
-//        dao.setConnection(con);
-//        int sq = dao.getMemberSequence(id);
-//        close(con);
-//        return sq;
-//    }
+	public int getMemberSequence(String id) {
+        BoardDao dao = BoardDao.getInstance();
+        Connection con = getConnection();
+        dao.setConnection(con);
+        int sq = dao.getMemberSequence(id);
+        close(con);
+        return sq;
+    }
 	
 	public boolean insertArticle(ArticleVo vo) {
 		BoardDao dao = BoardDao.getInstance();
@@ -124,5 +124,14 @@ public class BoardService {
 		close(con);
 		return isSucess;
 	}
+	
+	public String getWriterId(int num) {
+        BoardDao dao = BoardDao.getInstance();
+        Connection con = getConnection();
+        dao.setConnection(con);
+        String id = dao.getWriterId(num);
+        close(con);
+        return id;
+    }
 		
 }

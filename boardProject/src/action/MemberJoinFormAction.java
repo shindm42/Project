@@ -28,7 +28,7 @@ public class MemberJoinFormAction implements Action{
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("/");
-		//forward.setRedirect(true);
+		forward.setRedirect(true);
 		return forward;
 	}
 }
