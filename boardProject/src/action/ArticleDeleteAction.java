@@ -1,8 +1,5 @@
 package action;
 
-import static common.RegExp.ARTICLE_CONTENT;
-import static common.RegExp.ARTICLE_SUBJECT;
-
 import java.io.*;
 
 import javax.servlet.http.*;
@@ -24,36 +21,39 @@ public class ArticleDeleteAction implements Action{
 			return null;
 		}
 
-		String sj = request.getParameter("subject");
-		String cn = request.getParameter("content");
-		if (sj == null || sj.equals("") ||
-				!RegExp.checkString(ARTICLE_SUBJECT, sj) ||
-				cn == null || cn.equals("")	||
-				!RegExp.checkString(ARTICLE_CONTENT, cn)) {
-			 response.setContentType("text/html;charset=UTF-8");
-	            PrintWriter out = response.getWriter();
-	            out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
-	            out.close();
-	            return null;
-		}
-
+		String num = request.getParameter("num");
 		
+		int buff = Integer.parseInt(num);
+        if (buff <= 0) {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
+            out.close();
+            return null;
+        }
+        
 		
 		BoardService service = new BoardService();
 		ArticleVo vo = new ArticleVo();
 		
-		vo.setSj(sj);
-		vo.setCn(cn);
-//		vo.setMber_sq(service.getMemberSequence(id));
-
-		if (!service.insertArticle(vo)) {
+		
+		String writerId = service.getWriterId(buff);
+        if (writerId == null || !id.equals(writerId)) {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>alert('글을 저장하는데 실패하였습니다.');location.href='/';</script>");
+            out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
             out.close();
             return null;
         }
-		
+        
+        if (!service.deleteArticle(buff)) {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('글을 삭제하는데 실패하였습니다.');location.href='/';</script>");
+            out.close();
+            return null;
+        }
+        
 		ActionForward forward = new ActionForward();
 		forward.setPath("/list.do");
 		forward.setRedirect(true);

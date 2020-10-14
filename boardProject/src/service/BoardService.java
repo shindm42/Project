@@ -125,6 +125,22 @@ public class BoardService {
 		return isSucess;
 	}
 	
+	public boolean deleteArticle(int num) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.deleteArticle(num);
+		if (count > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
 	public String getWriterId(int num) {
         BoardDao dao = BoardDao.getInstance();
         Connection con = getConnection();

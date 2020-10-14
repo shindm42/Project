@@ -198,6 +198,22 @@ public class BoardDao {
 		}
 		return count;
 	}
+	
+	public int deleteArticle(int articl_sq) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement("delete from articl_db where articl_sq=?");
+			pstmt.setInt(1, articl_sq);
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
+	}
 
 	public String getWriterId(int num) {
 		PreparedStatement pstmt = null;
